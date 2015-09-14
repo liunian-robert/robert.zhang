@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.multipart.maxSize" value="104857600"/>
+    <constant name="struts.configuration.xml.reload" value="true"/> 
+  	<package name="mydefault" extends="struts-default">
+     </package>
+     <package name="login" extends="struts-default">
+     </package>
+     <package name="manage" extends="struts-default">
+     	<interceptors>
+    		<interceptor name="loginInterceptor" class="com.aqwx.interceptor.login"/> 
+    		<interceptor-stack name="loginStack">
+    			<interceptor-ref name="loginInterceptor"/>
+    			<interceptor-ref name="defaultStack"/>
+    		</interceptor-stack>
+    	</interceptors>
+    	<default-interceptor-ref name="loginStack"/>
+    	<global-results>
+    		<result name="serverOut" type="dispatcher">/manage/jsp/serverOut.html</result>
+    	</global-results>
+     </package>
+</struts>

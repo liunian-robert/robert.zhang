@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="news"> 
+     <sql id="cols">
+        id,name,image,date,content
+     </sql>
+     <sql id="col">
+        (id,name,image,date,content)
+     </sql>
+    <select id="selectOneById"  parameterType="com.aqwx.bean.news" resultType="com.aqwx.bean.news">
+            select <include refid="cols"/> from tb_news where id=#{id}
+    </select>
+    <select id="selectList" resultType="com.aqwx.bean.news">
+            select <include refid="cols"/> from tb_news
+    </select>
+    <insert id="insertOne" parameterType="com.aqwx.bean.news">
+            insert into tb_news <include refid="col"/> values (#{id},#{name},#{image},#{date},#{content})
+    </insert>
+    <update id="updateOne" parameterType="com.aqwx.bean.news">
+            update tb_news set name=#{name},image=#{image},date=#{date},content=#{content} where id=#{id}
+    </update>
+    <delete id="deleteOne" parameterType="com.aqwx.bean.news">
+            delete from tb_news  where id=#{id} 
+    </delete>
+    <select id="selectCount" resultType="int">
+            select count(id) from tb_news;
+    </select>
+    <select id="selectListByPage" parameterType="java.util.Map" resultType="com.aqwx.bean.news">
+            select <include refid="cols"/> from tb_news order by date limit #{index},#{count}
+    </select>
+</mapper>

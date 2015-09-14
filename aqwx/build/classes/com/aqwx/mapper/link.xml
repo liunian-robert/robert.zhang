@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="link"> 
+     <sql id="cols">
+        id,name,link
+     </sql>
+     <sql id="col">
+        (id,name,link)
+     </sql>
+    <select id="selectOneById"  parameterType="com.aqwx.bean.link" resultType="com.aqwx.bean.link">
+            select <include refid="cols"/> from tb_link where id=#{id}
+    </select>
+    <select id="selectList"  resultType="com.aqwx.bean.link">
+            select <include refid="cols"/> from tb_link
+    </select>
+    <insert id="insertOne" parameterType="com.aqwx.bean.link">
+            insert into tb_link <include refid="col"/> values (#{id},#{name},#{link})
+    </insert>
+    <update id="updateOne" parameterType="com.aqwx.bean.link">
+            update tb_link set name=#{name},link=#{link}  where id=#{id}
+    </update>
+    <delete id="deleteOne" parameterType="com.aqwx.bean.link">
+            delete from tb_link  where id=#{id} 
+    </delete>
+    <select id="selectCount" resultType="int">
+            select count(id) from tb_link;
+    </select>
+    <select id="selectListByPage" parameterType="java.util.Map" resultType="com.aqwx.bean.link">
+            select <include refid="cols"/> from tb_link limit #{index},#{count}
+    </select>
+</mapper>

@@ -1,0 +1,16 @@
+@CHARSET "utf-8";
+body{
+	background-color:#E2E1FE;
+	margin:0;
+	padding:0;
+	background-image: url("../images/login.jpg");
+	background-position: top;
+	background-repeat: no-repeat;
+}
+#table{
+	margin-top:262px;
+	margin-left:862px; 
+	font-family: "隶书";
+	font-weight:bolder;
+	font-size: 15px;
+}

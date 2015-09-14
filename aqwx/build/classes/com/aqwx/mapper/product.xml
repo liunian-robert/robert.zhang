@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="product"> 
+     <sql id="cols">
+        id,name,image,content,class_id
+     </sql>
+     <sql id="col">
+        (id,name,image,content,class_id)
+     </sql>
+    <select id="selectOneById"  parameterType="com.aqwx.bean.product" resultType="com.aqwx.bean.product">
+            select <include refid="cols"/> from tb_product where id=#{id}
+    </select>
+    <select id="selectOne"  parameterType="com.aqwx.bean.product" resultType="java.util.Map">
+            select a.id as id,a.name as name,a.image as image,a.content as content,b.id as class_id,b.name as class_name from tb_product a left join tb_productclass b  on a.class_id=b.id  where a.id=#{id}
+    </select>
+    <select id="selectList"  resultType="com.aqwx.bean.product">
+            select <include refid="cols"/> from tb_product
+    </select>
+    <insert id="insertOne" parameterType="com.aqwx.bean.product">
+            insert into tb_product <include refid="col"/> values (#{id},#{name},#{image},#{content},#{class_id})
+    </insert>
+    <update id="updateOne" parameterType="com.aqwx.bean.product">
+            update tb_product set name=#{name},image=#{image},content=#{content},class_id=#{class_id} where id=#{id}
+    </update>
+    <delete id="deleteOne" parameterType="com.aqwx.bean.product">
+            delete from tb_product  where id=#{id} 
+    </delete>
+    <delete id="deleteClass" parameterType="com.aqwx.bean.product">
+            delete from tb_product  where class_id=#{class_id} 
+    </delete>
+    <select id="selectCount" parameterType="com.aqwx.bean.product" resultType="int">
+            select count(id) from tb_product <if test="class_id!=null">where class_id=#{class_id}</if>
+    </select>
+    <select id="selectListByPage" parameterType="java.util.Map" resultType="java.util.Map">
+            select a.id as id,a.name as name,a.image as image,a.content as content,b.name as class_name from tb_product a left join tb_productclass b  on a.class_id=b.id 
+            <if test="id!=null">
+                where b.id=#{id}
+            </if>
+             limit #{index},#{count}
+    </select>
+</mapper>

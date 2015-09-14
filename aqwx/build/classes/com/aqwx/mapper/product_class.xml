@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="productClass"> 
+     <sql id="cols">
+        id,name
+     </sql>
+     <sql id="col">
+        (id,name)
+     </sql>
+    <select id="selectOneById"  parameterType="com.aqwx.bean.productClass" resultType="com.aqwx.bean.productClass">
+            select <include refid="cols"/> from tb_productclass where id=#{id}
+    </select>
+    <select id="selectList"  resultType="com.aqwx.bean.productClass">
+            select <include refid="cols"/> from tb_productclass
+    </select>
+    <insert id="insertOne" parameterType="com.aqwx.bean.productClass">
+            insert into tb_productclass <include refid="col"/> values (#{id},#{name})
+    </insert>
+    <update id="updateOne" parameterType="com.aqwx.bean.productClass">
+            update tb_productclass set name=#{name} where id=#{id}
+    </update>
+    <delete id="deleteOne" parameterType="com.aqwx.bean.productClass">
+            delete from tb_productclass  where id=#{id} 
+    </delete>
+    <select id="selectCount" resultType="int">
+            select count(id) from tb_productclass;
+    </select>
+    <select id="selectListByPage" parameterType="java.util.Map" resultType="com.aqwx.bean.productClass">
+            select <include refid="cols"/> from tb_productclass limit #{index},#{count}
+    </select>
+</mapper>

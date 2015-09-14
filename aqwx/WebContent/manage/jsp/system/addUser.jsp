@@ -1,0 +1,45 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>添加管理员</title>
+  </head>
+  
+  <body style="background-repeat: no-repeat;background-position: center;background: url('${pageContext.request.contextPath}/Images/background.jpg');">
+			<div class="panelBar" style=" border-width:1px;">
+							<ul class="toolBar">
+								<li><span style="margin-left:-25px;">当前位置：系统管理 >> 添加管理员</span></li>
+							</ul>
+			</div>
+			<div  class="pageContent">
+				<form method="post" action="${pageContext.request.contextPath}/manage/addUser" class="pageForm required-validate"   onsubmit="return validateCallback(this, dialogAjaxDone);">
+				  		<div class="pageFormContent nowrap" style="overflow-x:hidden" layoutH="56">
+				  			<table style="margin-top:50px;margin-left:-10px;height:130px;">
+								<tbody style="text-align:right;">
+									  <tr><td><label>用户名：</label></td><td><input type="text" name="name" class="required" style="width:200px;" maxlength="600"/></td></tr>
+									  <tr><td></td><td></td></tr>
+									  <tr><td></td><td></td></tr>
+									  <tr><td></td><td></td></tr>
+									  <tr><td><label>用户密码：</label></td><td><input type="password" name="password1" class="required" style="width:200px;" maxlength="600"/></td></tr>
+									  <tr><td></td><td></td></tr>
+									  <tr><td></td><td></td></tr>
+									  <tr><td></td><td></td></tr>
+									  <tr><td><label>确认密码：</label></td><td><input type="password" name="password" class="required" style="width:200px;" maxlength="600"/></td></tr>
+									  <tr><td></td><td></td></tr>
+									  <tr><td></td><td></td></tr>
+									  <!-- <div><tr><td colspan="2"><input type="submit" name="submit" value="保存" style="margin-left:80px;"/><input type="reset" name="reset" value="取消" style="margin-left:40px;"/></td></tr></div> -->
+									 <tr >
+										<td colspan="2">
+											<div class="buttonActive"  style="margin-left:150px;"><div class="buttonContent"><button type="submit" >保存</button></div></div>
+											<div class="button" style="margin-left:80px;"><div class="buttonContent"><button type="reset"  class="close">取消</button></div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							</div>
+							 </form>
+				 </div>
+  </body>
+</html>

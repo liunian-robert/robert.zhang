@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="join"> 
+     <sql id="cols">
+        id,image,content
+     </sql>
+     <sql id="col">
+        (id,image,content)
+     </sql>
+    <select id="selectOneById"  parameterType="com.aqwx.bean.join" resultType="com.aqwx.bean.join">
+            select <include refid="cols"/> from tb_join where id=#{id}
+    </select>
+    <insert id="insertOne" parameterType="com.aqwx.bean.join">
+            insert into tb_join <include refid="col"/> values (#{id},#{image},#{content})
+    </insert>
+    <update id="updateOne" parameterType="com.aqwx.bean.join">
+            update tb_join set image=#{image},content=#{content} where id=#{id}
+    </update>
+    <delete id="deleteOne" parameterType="com.aqwx.bean.join">
+            delete from tb_join  where id=#{id} 
+    </delete>
+    <select id="selectCount" resultType="int">
+            select count(id) from tb_join;
+    </select>
+    <select id="selectListByPage" parameterType="java.util.Map" resultType="com.aqwx.bean.join">
+            select <include refid="cols"/> from tb_join limit #{index},#{count}
+    </select>
+</mapper>

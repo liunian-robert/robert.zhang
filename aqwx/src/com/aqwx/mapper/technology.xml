@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="technology"> 
+     <sql id="cols">
+        id,name,image,date
+     </sql>
+     <sql id="col">
+        (id,name,image,date)
+     </sql>
+    <select id="selectOneById"  parameterType="com.aqwx.bean.technology" resultType="com.aqwx.bean.technology">
+            select <include refid="cols"/> from tb_technology where id=#{id}
+    </select>
+    <insert id="insertOne" parameterType="com.aqwx.bean.technology">
+            insert into tb_technology <include refid="col"/> values (#{id},#{name},#{image},#{date})
+    </insert>
+    <update id="updateOne" parameterType="com.aqwx.bean.technology">
+            update tb_technology set name=#{name},image=#{image},date=#{date} where id=#{id}
+    </update>
+    <delete id="deleteOne" parameterType="com.aqwx.bean.technology">
+            delete from tb_technology  where id=#{id} 
+    </delete>
+    <select id="selectCount" resultType="int">
+            select count(id) from tb_technology;
+    </select>
+    <select id="selectListByPage" parameterType="java.util.Map" resultType="com.aqwx.bean.technology">
+            select <include refid="cols"/> from tb_technology limit #{index},#{count}
+    </select>
+</mapper>

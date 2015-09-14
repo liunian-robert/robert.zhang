@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="company"> 
+     <sql id="cols">
+        id,name,logo,phone,phone1,phone2,qq1,qq2,adress,adress2,email,image,site,content,movie
+     </sql>
+    <select id="selectOneById"  parameterType="com.aqwx.bean.company" resultType="com.aqwx.bean.company">
+            select <include refid="cols"/> from tb_company where id=#{id}
+    </select>
+    <update id="updateOne" parameterType="com.aqwx.bean.company">
+            update tb_company set name=#{name},logo=#{logo},phone=#{phone},phone1=#{phone1},phone2=#{phone2},qq1=#{qq1},qq2=#{qq2},adress=#{adress},adress2=#{adress2},email=#{email},image=#{image},site='www.aqiwx.com',content=#{content}
+    </update>
+    <update id="updateMovie" parameterType="com.aqwx.bean.company">
+        update tb_company set movie=#{movie} where id=#{id}
+    </update>
+    <select id="selectCount" resultType="int">
+            select count(id) from tb_company;
+    </select>
+    <select id="selectListByPage" parameterType="java.util.Map" resultType="com.aqwx.bean.company">
+            select <include refid="cols"/> from tb_company limit #{index},#{count}
+    </select>
+</mapper>

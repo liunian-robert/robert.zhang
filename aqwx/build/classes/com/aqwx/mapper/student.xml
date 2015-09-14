@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="student"> 
+     <sql id="cols">
+        id,name,image,content
+     </sql>
+     <sql id="col">
+        (id,name,image,content)
+     </sql>
+    <select id="selectOneById"  parameterType="com.aqwx.bean.student" resultType="com.aqwx.bean.student">
+            select <include refid="cols"/> from tb_student where id=#{id}
+    </select>
+    <insert id="insertOne" parameterType="com.aqwx.bean.student">
+            insert into tb_student <include refid="col"/> values (#{id},#{name},#{image},#{content})
+    </insert>
+    <update id="updateOne" parameterType="com.aqwx.bean.student">
+            update tb_student set name=#{name},image=#{image},content=#{content} where id=#{id}
+    </update>
+    <delete id="deleteOne" parameterType="com.aqwx.bean.student">
+            delete from tb_student  where id=#{id} 
+    </delete>
+    <select id="selectCount" resultType="int">
+            select count(id) from tb_student;
+    </select>
+    <select id="selectListByPage" parameterType="java.util.Map" resultType="com.aqwx.bean.student">
+            select <include refid="cols"/> from tb_student limit #{index},#{count}
+    </select>
+</mapper>

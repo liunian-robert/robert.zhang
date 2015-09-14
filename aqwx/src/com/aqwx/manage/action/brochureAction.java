@@ -102,10 +102,12 @@ public class brochureAction extends ActionSupport
     this.nw.setName(this.name);
     this.nw.setId(Utils.getRandomString());
     if ((this.fm != null) && (this.fm.isFile())) {
-      String path = "/images/slideshow/";
+    String path = ServletActionContext.getServletContext()
+            .getRealPath("/images/slideshow") +
+             "/";
       String filename = Utils.getImageString(this.fmFileName);
       Utils.write2Image(this.fm, path + filename);
-      this.nw.setImage(Utils.getProperty()+path + filename);
+      this.nw.setImage(path + filename);
     }
     service.addbrochure(this.nw);
     return "SUCCESS";
@@ -142,11 +144,12 @@ public class brochureAction extends ActionSupport
     this.nw.setName(this.name);
     this.nw.setImage(this.image);
     if ((this.fm != null) && (this.fm.isFile())) {
-      String path = "/images/slideshow/";
+        String path = ServletActionContext.getServletContext()
+                   .getRealPath("/images/slideshow") +
+                   "/";
       String iname = this.image.substring(this.image.lastIndexOf("/") + 1, this.image.length());
       Utils.write2Image(this.fm, path + iname);
-      String n = Utils.getProperty();
-      this.nw.setImage(Utils.getProperty()+path+iname);
+      this.nw.setImage("/images/slideshow/"+iname);
     }
     service.modify(this.nw);
     return "SUCCESS";
@@ -159,7 +162,9 @@ public class brochureAction extends ActionSupport
     this.nw.setId(this.id);
     brochure br = service.getbrochureById(this.nw);
     String ms = br.getImage().substring(br.getImage().lastIndexOf("/") + 1, br.getImage().length());
-    String path ="/images/slideshow/";
+    String path = ServletActionContext.getServletContext()
+            .getRealPath("/images/slideshow") +
+            "/";
     Utils.deleteFile(path, ms);
     service.delete(this.nw);
     return "SUCCESS";

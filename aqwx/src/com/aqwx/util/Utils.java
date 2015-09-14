@@ -94,16 +94,10 @@ import org.apache.struts2.ServletActionContext;
    }
    public static void write2Image(File Image, String fileName) {
         OutputStream out = null;
-        String property = getProperty();
-        String path = fileName.substring(0,fileName.lastIndexOf("/"));
-        File file = new File(property+path);
         InputStream in = null;
      try
      {
-         if(!file.exists()){
-             file.mkdirs();
-         }
-          out = new FileOutputStream(property+fileName);
+         out = new FileOutputStream(fileName);
          in = new FileInputStream(Image);
          IOUtils.copy(in, out);
          out.close();
@@ -187,15 +181,15 @@ import org.apache.struts2.ServletActionContext;
        return content;
    }
    public static void deleteFile(String path, String filename) {
-       String property = getProperty();
-       File folder = new File(property+path);
+       File folder = new File(path);
        File[] files = folder.listFiles();
        for (File file : files)
          if (file.getName().equals(filename.trim()))
            file.delete();
    }
-   public static String  getProperty(){
+   
+   /*public static String  getProperty(){
        String property = "/home/vcap/file/199c089a-5022-4cfd-affb-b4fd00f5b2f6";
        return property;
-   }
+   }*/
  }

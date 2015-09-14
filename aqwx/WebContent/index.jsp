@@ -49,7 +49,7 @@
     <div id="slider_wrapper">
         <div id="slider">
         	<c:forEach items="${mp.brochure}" var="brochure">
-            	<a rel="lightbox[portfolio]"  href="file:///${brochure.image}"  title="file:///${brochure.name}"><img src="${brochure.image}"  title="${brochure.name}"/></a>
+            	<a rel="lightbox[portfolio]"  href="${pageContext.request.contextPath}${brochure.image}"  title="${brochure.name}"><img src="${pageContext.request.contextPath}${brochure.image}"  title="${brochure.name}"/></a>
         	</c:forEach>
         </div>
 	</div>      
